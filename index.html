@@ -76,17 +76,16 @@
 
             map.add(layer);
 
-            // Add the locate widget to the top left corner of the view
-            view.ui.add(locateBtn, {
-                position: "top-right", 
-                index: 2
+            // Add the locate widget 
+            view.ui.add(searchWidget, locateBtn, {
+                position: "top-right"
             });
 
-            // adds search widget to top left above locate button 
-            view.ui.add(searchWidget, {
-                position: "top-right", 
-                index: 0
-            });
+            // adds search widget
+            //view.ui.add(searchWidget, {
+            //    position: "top-right", 
+            //    index: 0
+          //  });
 
          });
      </script>
