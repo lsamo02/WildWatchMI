@@ -56,7 +56,7 @@
             const view = new MapView({
                 container: "viewDiv", // Reference to the DOM node that will contain the view
                     map: map, // References the map object
-                    center: [-87.39351634543273, 46.54021932119137], // Longitude, latitude for Marquette, MI
+                    center: [-90.27967919876848, 43.667524656209785], // Longitude, latitude for Marquette, MI
                     zoom: 10, // Zoom level
                     container: "viewDiv" // Div element
             });
@@ -70,11 +70,11 @@
             });
 
             // Create featurelayer from feature service 
-            const layer = new FeatureLayer({ 
-                url: "https://services.arcgis.com/HRPe58bUyBqyyiCt/arcgis/rest/services/survey123_f05bd2b4b2fb4a619cc49088c9948dbb_results/FeatureServer" //URL to survey 123 results layer 
-            });
+            //const layer = new FeatureLayer({ 
+            //    url: "https://services.arcgis.com/HRPe58bUyBqyyiCt/arcgis/rest/services/survey123_f05bd2b4b2fb4a619cc49088c9948dbb_results/FeatureServer" //URL to survey 123 results layer 
+            //});
 
-            map.add(layer);
+            //map.add(layer);
 
             // Add the locate widget 
             view.ui.add(locateBtn, {
