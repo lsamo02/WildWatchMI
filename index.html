@@ -82,11 +82,17 @@
                 "height": "18px"
                 }
             }
+
+            const popupAnimal={
+                "content": "<b>Species:</b> {what_species_did_you_observe}<br><b>Observation Date:</b>{when_did_you_observed_distresse}"
+            }
             
             // Create featurelayer from feature service 
             const layer = new FeatureLayer({ 
                 url: "https://services.arcgis.com/HRPe58bUyBqyyiCt/arcgis/rest/services/survey123_f0c3b499e2714a5cb395081c36f6269d_results/FeatureServer", //URL to survey 123 results layer 
-                renderer: animalRenderer
+                renderer: animalRenderer, 
+                outFields:["when_did_you_observed_distresse", "what_species_did_you_observe"], 
+                popupTemplate: popupAnimal
             });
 
             map.add(layer);
