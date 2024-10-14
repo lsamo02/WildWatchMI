@@ -73,9 +73,20 @@
                 view: view
             });
 
+            const trailheadsRenderer = {
+                "type": "simple",
+                "symbol": {
+                "type": "picture-marker",
+                "url": "http://static.arcgis.com/images/Symbols/NPS/npsPictograph_0231b.png",
+                "width": "18px",
+                "height": "18px"
+                }
+            }
+            
             // Create featurelayer from feature service 
             const layer = new FeatureLayer({ 
-                url: "https://services.arcgis.com/HRPe58bUyBqyyiCt/arcgis/rest/services/survey123_f0c3b499e2714a5cb395081c36f6269d_results/FeatureServer" //URL to survey 123 results layer 
+                url: "https://services.arcgis.com/HRPe58bUyBqyyiCt/arcgis/rest/services/survey123_f0c3b499e2714a5cb395081c36f6269d_results/FeatureServer", //URL to survey 123 results layer 
+                renderer: trailheadsRenderer
             });
 
             map.add(layer);
