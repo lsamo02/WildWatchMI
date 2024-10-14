@@ -49,7 +49,7 @@
             alert("Keep Wildlife Wild! \nMaintain a safe distance from wildlife when recording your encounter. Learn more at: \nhttps://www.michigan.gov/dnr/managing-resources/wildlife/keep-wild"); 
         }
 
-        require([ "esri/config", "esri/Map", "esri/views/MapView", "esri/widgets/Search", "esri/widgets/Locate", "esri/layers/FeatureLayer", "esri/widgets/Legend", "esri/widgets/Expand", "esri/core/reactiveUtils" ], (esriConfig, Map, MapView, Locate, Search, FeatureLayer, Expand, reactiveUtils) => {
+        require([ "esri/config", "esri/Map", "esri/views/MapView", "esri/widgets/Search", "esri/widgets/Locate", "esri/layers/FeatureLayer", "esri/widgets/Legend", "esri/widgets/Expand", "esri/widgets/BasemapGallery", "esri/core/reactiveUtils" ], (esriConfig, Map, MapView, Locate, Search, FeatureLayer, Expand, BasemapGallery, reactiveUtils) => {
 
             esriConfig.apiKey = "AAPTxy8BH1VEsoebNVZXo8HurOxCJM2SBFdn7xcvT1L38mvM8JqyGgY9I6ZreW_-CskCek5wBVwF7SEueg9kN6l8kkJXzv1l1OMA060-IPeO302BssrSrxYedw9j4tTgXYeam0aL0P3vclOI4HjPaMmO3pQweizFCRuDTWSVP42Vualv70iB8JLH7wMbh4v9QoxW_wZvHni7MCbxYsBO_7lPlXYTEHvezn4AyvYiYeVWFfx-TxXUAoY19Z4ueRRW_UTsAT1_DalpM85W";
           
@@ -79,6 +79,38 @@
             });
 
             map.add(layer);
+
+        const basemapGallery = new BasemapGallery({
+          view: view,
+          container: document.createElement("div")
+        });
+
+        // Create an Expand instance and set the content
+        // property to the DOM node of the basemap gallery widget
+        // Use an Esri icon font to represent the content inside
+        // of the Expand widget
+
+        const bgExpand = new Expand({
+          view: view,
+          content: basemapGallery
+        });
+
+        // close the expand whenever a basemap is selected
+        // on mobile devices
+        reactiveUtils.watch(
+          () => basemapGallery.activeBasemap,
+          () => {
+            const mobileSize = view.heightBreakpoint === "xsmall" || view.widthBreakpoint === "xsmall";
+
+            if (mobileSize) {
+              bgExpand.collapse();
+            }
+          }
+        );
+
+        // Add the expand instance to the ui
+
+        view.ui.add(bgExpand, "top-right");
             
 
             // Add the locate widget 
@@ -91,7 +123,6 @@
                 position: "top-left", 
                 index: 0
             });
-
          
         });
      </script>
