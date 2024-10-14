@@ -90,16 +90,16 @@
                 content: basemapGallery
             });
 
-            reactiveUtils.watch(
-                    () => basemapGallery.activeBasemap,
-                    () => {
-                        const mobileSize = view.heightBreakpoint === "xsmall" || view.widthBreakpoint === "xsmall";
+            // reactiveUtils.watch(
+            //         () => basemapGallery.activeBasemap,
+            //         () => {
+            //             const mobileSize = view.heightBreakpoint === "xsmall" || view.widthBreakpoint === "xsmall";
 
-                        if (mobileSize) {
-                        bgExpand.collapse();
-                        }
-                    }
-                );
+            //             if (mobileSize) {
+            //             bgExpand.collapse();
+            //             }
+            //         }
+            //     );
 
             view.ui.add(bgExpand, "bottom-left");
             });
