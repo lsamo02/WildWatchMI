@@ -139,19 +139,9 @@
 
 
 
-            const legend = Legend({
-                view: view,
-                layerInfos: [
-                    {
-                    layer: layer,
-                    title: "Reported Distressed Wildlife"
-                    },
-                    {
-                    layer: rehabLayer,
-                    title: "MI Licensed Wildlife Rehabilitators"
-                    }
+            let legend = new Legend ({
+                view: view
 
-                ]
             });
 
           // Add widget to the bottom right corner of the view
