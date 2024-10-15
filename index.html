@@ -145,7 +145,13 @@
             map.add(rehabLayer);
 
             let legend = new Legend ({
-                view:view
+                view:view,
+                layerInfos: [
+                    {
+                        layer: layer,
+                        title: "Distressed Wildlife Reported"
+                    }
+                    ]
             })
 
             view.ui.add (legend, "bottom-left");
