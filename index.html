@@ -125,18 +125,16 @@
             
             map.add(rehabLayer);
 
+             //adds search widget
+            view.ui.add(searchWidget, {
+                position: "top-left", 
+                index: 0
+            });
             
             // Add the locate widget 
             view.ui.add(locateBtn, {
                 position: "top-left"
             });
-
-            //adds search widget
-            view.ui.add(searchWidget, {
-                position: "top-left", 
-                index: 0
-            });
-
 
 
             let legend = Legend ({
