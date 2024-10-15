@@ -150,11 +150,20 @@
                     {
                         layer: layer,
                         title: "Distressed Wildlife Reported"
+                    },
+                    {
+                        layer:rehabLayer,
+                        title: "MI Licensed Wildlife Rehabilitator"
                     }
                     ]
-            })
+            }); 
 
-            view.ui.add (legend, "bottom-left");
+            const legendExpand = new Expand({
+                view: view,
+                content: legend
+            });
+
+            view.ui.add (legendExpand, "bottom-left");
 
 
         });
