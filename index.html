@@ -67,30 +67,36 @@
 
             const searchWidget = new Search({
                 view: view,
-                container: document.createElement("div")
+                //container: document.createElement("div")
             });
 
-            const searchExpand = new Expand({
-                view: view,
-                content: searchWidget
-            });
+            // const searchExpand = new Expand({
+            //     view: view,
+            //     content: searchWidget
+            // });
 
             //adds search Expand widget
-            view.ui.add(searchExpand, {
+            view.ui.add(searchWidget, {
                 position: "top-left", 
                 index: 1
             });
 
-            // const locateBtn = new Locate({
-            //     view: view
-            // });
+            const locateBtn = new Locate({
+                view: view, 
+                container: document.createElement ("div")
+            });
 
-            // // Add the locate widget 
-            // view.ui.add(locateBtn, {
-            //     position: "top-left",
-            //     index:0
+            const locateExpand = new Expand({
+                view:view,
+                content: locateBtn
+            })
+
+            // Add the locate widget 
+            view.ui.add(locateExpand, {
+                position: "top-left",
+                index:0
                 
-            // });
+            });
 
             const animalRenderer = {
                 "type": "simple",
