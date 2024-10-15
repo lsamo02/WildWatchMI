@@ -65,17 +65,6 @@
                     container: "viewDiv" // Div element
             });
 
-            const locateBtn = new Locate({
-                view: view
-            });
-
-            // Add the locate widget 
-            view.ui.add(locateBtn, {
-                position: "top-left",
-                index:0
-                
-            });
-
             const searchWidget = new Search({
                 view: view
             });
@@ -89,6 +78,17 @@
             view.ui.add(searchExpand, {
                 position: "top-left", 
                 index: 1
+            });
+
+            const locateBtn = new Locate({
+                view: view
+            });
+
+            // Add the locate widget 
+            view.ui.add(locateBtn, {
+                position: "top-left",
+                index:0
+                
             });
 
             const animalRenderer = {
