@@ -70,11 +70,6 @@
                 //container: document.createElement("div")
             });
 
-            // const searchExpand = new Expand({
-            //     view: view,
-            //     content: searchWidget
-            // });
-
             //adds search Expand widget
             view.ui.add(searchWidget, {
                 position: "top-left", 
@@ -97,30 +92,6 @@
                 index:0
                 
             });
-
-            const animalRenderer = {
-                "type": "simple",
-                "symbol": {
-                "type": "picture-marker",
-                "url": "bird_symbol.png",
-                "width": "18px",
-                "height": "18px"
-                }
-            }
-
-            const popupAnimal={
-                "content": "<b>Species: </b> {what_species_did_you_observe}<br><b>Observation Date: </b>{when_did_you_observed_distresse}"
-            }
-            
-            // Create featurelayer from feature service 
-            const layer = new FeatureLayer({ 
-                url: "https://services.arcgis.com/HRPe58bUyBqyyiCt/arcgis/rest/services/survey123_f0c3b499e2714a5cb395081c36f6269d_results/FeatureServer", //URL to survey 123 results layer 
-                renderer: animalRenderer, 
-                outFields:["when_did_you_observed_distresse", "what_species_did_you_observe"],
-                popupTemplate: popupAnimal
-            });
-
-            map.add(layer);
 
             const rehabRenderer = {
                 type: "simple",  // autocasts as new SimpleRenderer()
@@ -149,6 +120,30 @@
             });
             
             map.add(rehabLayer);
+            
+            const animalRenderer = {
+                "type": "simple",
+                "symbol": {
+                "type": "picture-marker",
+                "url": "bird_symbol.png",
+                "width": "18px",
+                "height": "18px"
+                }
+            }
+
+            const popupAnimal={
+                "content": "<b>Species: </b> {what_species_did_you_observe}<br><b>Observation Date: </b>{when_did_you_observed_distresse}"
+            }
+            
+            // Create featurelayer from feature service 
+            const layer = new FeatureLayer({ 
+                url: "https://services.arcgis.com/HRPe58bUyBqyyiCt/arcgis/rest/services/survey123_f0c3b499e2714a5cb395081c36f6269d_results/FeatureServer", //URL to survey 123 results layer 
+                renderer: animalRenderer, 
+                outFields:["when_did_you_observed_distresse", "what_species_did_you_observe"],
+                popupTemplate: popupAnimal
+            });
+
+            map.add(layer);
 
             let legend = new Legend ({
                 view:view,
