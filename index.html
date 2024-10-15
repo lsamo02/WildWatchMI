@@ -54,64 +54,69 @@
             esriConfig.apiKey = "AAPTxy8BH1VEsoebNVZXo8HurOxCJM2SBFdn7xcvT1L38mvM8JqyGgY9I6ZreW_-CskCek5wBVwF7SEueg9kN6l8kkJXzv1l1OMA060-IPeO302BssrSrxYedw9j4tTgXYeam0aL0P3vclOI4HjPaMmO3pQweizFCRuDTWSVP42Vualv70iB8JLH7wMbh4v9QoxW_wZvHni7MCbxYsBO_7lPlXYTEHvezn4AyvYiYeVWFfx-TxXUAoY19Z4ueRRW_UTsAT1_DalpM85W";
           
             const map = new Map({
-                basemap: "satellite"
+                basemap: "satellite" //basemap satellite 
             });
 
             const view = new MapView({
                 container: "viewDiv", // Reference to the DOM node that will contain the view
                     map: map, // References the map object
-                    center: [-84.62365125904314, 45.19256541677666], // Longitude, latitude for Marquette, MI
+                    center: [-84.62365125904314, 45.19256541677666], // Longitude, latitude for MI
                     zoom: 6, // Zoom level
                     container: "viewDiv" // Div element
             });
 
+            //creating search widget
             const searchWidget = new Search({
                 view: view,
-                //container: document.createElement("div")
+                
             });
 
-            //adds search Expand widget
+            //adds search widget
             view.ui.add(searchWidget, {
                 position: "top-left", 
                 index: 1
             });
 
+            //created locate button
             const locateBtn = new Locate({
                 view: view, 
                 container: document.createElement ("div")
             });
 
+            //created expand for locate button
             const locateExpand = new Expand({
                 view:view,
                 content: locateBtn
             })
 
-            // Add the locate widget 
+            // Add the locate Expand widget 
             view.ui.add(locateExpand, {
                 position: "top-left",
                 index:0
                 
             });
 
+            //renderer for MI Licensed Wildlife Rehabilitator pts
             const rehabRenderer = {
                 type: "simple",  // autocasts as new SimpleRenderer()
                 symbol: {
                     type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
                     size: 6,
                     color: "purple",
-                    outline: {  // autocasts as new SimpleLineSymbol()
+                    outline: {  
                     width: 0.5,
                     color: "white"
                     }
                 }
             };
 
+            //pop up for MI Licensed Wildlife Rehabilitators
             const popupRehab={
                 "title": "MI Licensed Wildlife Rehabilitators",
                 "content": "<b>Name: </b> {NAME_1}<br><b>Organization: </b>{ORGANIZATION}<br><b>City: </b>{City}<br><b>Phone Number: </b>{TELEPHONE}<br><b>Species Accepted: </b>{SPECIES}"
             };
             
-            // Create featurelayer from feature service 
+            // Create rehabilitators layer from feature service 
             const rehabLayer = new FeatureLayer({ 
                 url: "https://services.arcgis.com/HRPe58bUyBqyyiCt/arcgis/rest/services/MI_WildlifeRehabilitators/FeatureServer", //URL to MI rehabilitator layer
                 renderer: rehabRenderer, 
@@ -119,8 +124,10 @@
                 popupTemplate: popupRehab
             });
             
+            //adds rehabilitator layer to map
             map.add(rehabLayer);
             
+            //creates renderer for distressed wildlife observations
             const animalRenderer = {
                 "type": "simple",
                 "symbol": {
@@ -131,11 +138,13 @@
                 }
             }
 
+            //pop up for distressed wildlife observations
             const popupAnimal={
+                "title": "Reported Distressed Wildlife",
                 "content": "<b>Species: </b> {what_species_did_you_observe}<br><b>Observation Date: </b>{when_did_you_observed_distresse}"
             }
             
-            // Create featurelayer from feature service 
+            // Create distressed wildlife observation layer from feature service 
             const layer = new FeatureLayer({ 
                 url: "https://services.arcgis.com/HRPe58bUyBqyyiCt/arcgis/rest/services/survey123_f0c3b499e2714a5cb395081c36f6269d_results/FeatureServer", //URL to survey 123 results layer 
                 renderer: animalRenderer, 
@@ -143,8 +152,10 @@
                 popupTemplate: popupAnimal
             });
 
+            //adds wildlife layer to map
             map.add(layer);
 
+            //creates legend and updates legend descriptions for layers
             let legend = new Legend ({
                 view:view,
                 layerInfos: [
@@ -159,11 +170,13 @@
                     ]
             }); 
 
+            //created expand for legend
             const legendExpand = new Expand({
                 view: view,
                 content: legend
             });
 
+            //adds legend to map
             view.ui.add (legendExpand, "bottom-left");
 
 
@@ -171,8 +184,9 @@
      </script>
 
   </head>
-  <body onload ="safetyAlertFunction()">
+  <body onload ="safetyAlertFunction()"><!--loads safety alert when opening the app-->
 
+    <!--adds report distressed wildlife button to app-->
     <a href="https://arcg.is/1yWjGD"target="_blank" class="addRecordBtn">Report Distressed Wildlife</a>
 
     <div id="viewDiv"></div>
