@@ -73,6 +73,11 @@
                 view: view
             });
 
+            const searchExpand = new Expand({
+                view: view,
+            content: searchWidget
+            });
+
             const animalRenderer = {
                 "type": "simple",
                 "symbol": {
@@ -126,7 +131,7 @@
             map.add(rehabLayer);
 
              //adds search widget
-            view.ui.add(searchWidget, {
+            view.ui.add(searchExpand, {
                 position: "top-left", 
                 index: 1
             });
