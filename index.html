@@ -137,28 +137,25 @@
                 index: 0
             });
 
-            view.when(() => {
-          // get the first layer in the collection of operational layers in the WebMap
-          // when the resources in the MapView have loaded.
-          const featureLayer = map.layers.getItemAt(0);
 
-          const legend = new Legend({
-            view: view,
-            layerInfos: [
-              {
-                layer: layer,
-                title: "Reported Distressed Wildlife"
-              },
-              {
-                layer: rehabLayer,
-                title: "MI Licensed Wildlife Rehabilitators"
-              }
 
-            ]
-          });
+            const legend = new Legend({
+                view: view,
+                layerInfos: [
+                    {
+                    layer: layer,
+                    title: "Reported Distressed Wildlife"
+                    },
+                    {
+                    layer: rehabLayer,
+                    title: "MI Licensed Wildlife Rehabilitators"
+                    }
+
+                ]
+            });
 
           // Add widget to the bottom right corner of the view
-          view.ui.add(legend, "bottom-right");
+            view.ui.add(legend, "bottom-right");
          
         });
      </script>
