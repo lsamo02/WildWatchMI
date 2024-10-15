@@ -84,18 +84,46 @@
             }
 
             const popupAnimal={
-                "content": "<b>Species:</b> {what_species_did_you_observe}<br><b>Observation Date:</b>{when_did_you_observed_distresse}<br>{Photos And Files}"
+                "content": "<b>Species:</b> {what_species_did_you_observe}<br><b>Observation Date:</b>{when_did_you_observed_distresse}"
             }
             
             // Create featurelayer from feature service 
             const layer = new FeatureLayer({ 
                 url: "https://services.arcgis.com/HRPe58bUyBqyyiCt/arcgis/rest/services/survey123_f0c3b499e2714a5cb395081c36f6269d_results/FeatureServer", //URL to survey 123 results layer 
                 renderer: animalRenderer, 
-                outFields:["when_did_you_observed_distresse", "what_species_did_you_observe", "Photos And Files"], 
+                outFields:["when_did_you_observed_distresse", "what_species_did_you_observe"],
                 popupTemplate: popupAnimal
             });
 
             map.add(layer);
+
+            const rehabRenderer = {
+                type: "simple",  // autocasts as new SimpleRenderer()
+                symbol: {
+                    type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
+                    size: 6,
+                    color: "purple",
+                    outline: {  // autocasts as new SimpleLineSymbol()
+                    width: 0.5,
+                    color: "white"
+                    }
+                }
+            };
+
+            const popupRehab={
+                "title": "MI Licensed Wildlife Rehabilitators",
+                "content": "<b>Name:</b> {NAME_1}<br><b>Organization:</b>{ORGANIZATION}<br><b>City:</b>{City}<br><b>Phone Number:</b>{TELEPHONE}<br><b>Species Accepted:</b>{SPECIES}"
+            };
+            
+            // Create featurelayer from feature service 
+            const rehabLayer = new FeatureLayer({ 
+                url: "https://services.arcgis.com/HRPe58bUyBqyyiCt/arcgis/rest/services/MI_WildlifeRehabilitators/FeatureServer", //URL to MI rehabilitator layer
+                renderer: rehabRenderer, 
+                outFields:["NAME_1", "ORGANIZATION", "City", "TELEPHONE", "SPECIES"],
+                popupTemplate: popupRehab
+            });
+            
+            map.add(rehabLayer);
 
             
             // Add the locate widget 
