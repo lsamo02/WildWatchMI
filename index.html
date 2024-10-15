@@ -49,7 +49,7 @@
             alert("Keep Wildlife Wild! \nMaintain a safe distance from wildlife when recording your encounter. Learn more at: \nhttps://www.michigan.gov/dnr/managing-resources/wildlife/keep-wild"); 
         }
 
-        require([ "esri/config", "esri/Map", "esri/views/MapView", "esri/widgets/Search", "esri/widgets/Locate", "esri/layers/FeatureLayer", "esri/widgets/Legend", "esri/widgets/Expand", "esri/widgets/BasemapGallery", "esri/core/reactiveUtils" ], (esriConfig, Map, MapView, Locate, Search, FeatureLayer, Expand, BasemapGallery, reactiveUtils) => {
+        require([ "esri/config", "esri/Map", "esri/views/MapView", "esri/widgets/Search", "esri/widgets/Locate", "esri/layers/FeatureLayer", "esri/widgets/Legend", "esri/widgets/Expand", "esri/widgets/BasemapGallery", "esri/core/reactiveUtils" ], (esriConfig, Map, MapView, Locate, Search, FeatureLayer, Expand, BasemapGallery, reactiveUtils, Legend) => {
 
             esriConfig.apiKey = "AAPTxy8BH1VEsoebNVZXo8HurOxCJM2SBFdn7xcvT1L38mvM8JqyGgY9I6ZreW_-CskCek5wBVwF7SEueg9kN6l8kkJXzv1l1OMA060-IPeO302BssrSrxYedw9j4tTgXYeam0aL0P3vclOI4HjPaMmO3pQweizFCRuDTWSVP42Vualv70iB8JLH7wMbh4v9QoxW_wZvHni7MCbxYsBO_7lPlXYTEHvezn4AyvYiYeVWFfx-TxXUAoY19Z4ueRRW_UTsAT1_DalpM85W";
           
@@ -136,6 +136,29 @@
                 position: "top-left", 
                 index: 0
             });
+
+            view.when(() => {
+          // get the first layer in the collection of operational layers in the WebMap
+          // when the resources in the MapView have loaded.
+          const featureLayer = map.layers.getItemAt(0);
+
+          const legend = new Legend({
+            view: view,
+            layerInfos: [
+              {
+                layer: layer,
+                title: "Reported Distressed Wildlife"
+              },
+              {
+                layer: rehabLayer,
+                title: "MI Licensed Wildlife Rehabilitators"
+              }
+
+            ]
+          });
+
+          // Add widget to the bottom right corner of the view
+          view.ui.add(legend, "bottom-right");
          
         });
      </script>
